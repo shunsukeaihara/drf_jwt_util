@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  toxtest:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install tox
+      - run:
+          name: test
+          command: |
+            . venv/bin/activate
+            tox
+workflows:
+  version: 2
+  test:
+    jobs:
+      - toxtest
