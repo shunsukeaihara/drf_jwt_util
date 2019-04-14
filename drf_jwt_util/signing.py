@@ -36,7 +36,6 @@ def verify_token(token, type, max_age):
             raise BadSignature()
     except SignatureExpired as e:
         # 410
-        print(e)
         raise e
     except BadSignature as e:
         # 404
@@ -56,7 +55,6 @@ def verify_email_token(token, type, max_age):
             raise BadSignature()
     except SignatureExpired as e:
         # 410
-        print(e)
         raise e
     except BadSignature as e:
         # 404
