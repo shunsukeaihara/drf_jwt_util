@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="drf_jwt_util",
-    version="0.1.1",
+    version="0.1.2",
     description="drf jwt util",
     author='Shunsuke Aihara',
     author_email='aihara@argmax.jp',
