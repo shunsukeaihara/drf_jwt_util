@@ -9,7 +9,7 @@ setup(
     url='https://github.com/shunsukeaihara/drf_jwt_util',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["django", "djangorestframework", "djangorestframework-jwt"],
+    install_requires=["django", "djangorestframework", "djangorestframework-jwt", "social-auth-app-django"],
     tests_require=["tox", "factory_boy"],
     license="MIT License",
 )
