@@ -14,7 +14,7 @@ User = get_user_model()
 class UserFactory(factory.DjangoModelFactory):
     class Meta:
         model = User
-    username = factory.Faker('user_name', 'ja_JP')
+    username = factory.Faker('user_name', locale='ja_JP')
     email = factory.Faker('email')
 
 
