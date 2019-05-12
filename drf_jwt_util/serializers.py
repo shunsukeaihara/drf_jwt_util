@@ -64,7 +64,7 @@ class DefaultUserSerializer(serializers.ModelSerializer):
 
 
 class ValidatePasswordMixin:
-    def validate_password1(self, value):
+    def validate_password_1(self, value):
         try:
             validate_password(value)
         except ValidationError as exc:
@@ -72,18 +72,20 @@ class ValidatePasswordMixin:
         return value
 
     def validate(self, data):
-        if data['password1'] != data['password2']:
-            raise serializers.ValidationError({"password2": _("You must type the same email each time.")})
-        self.password = data["password1"]
+        if data['password_1'] != data['password_2']:
+            raise serializers.ValidationError({"password_2": _("You must type the same email each time.")})
+        self.password = data["password_1"]
+        del data["password_1"]
+        del data["password_2"]
         return data
 
 
 class RegisterSerializer(ValidatePasswordMixin, serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = [get_username_field(), "password1", "password2"]
-    password1 = serializers.CharField(write_only=True)
-    password2 = serializers.CharField(write_only=True)
+        fields = [get_username_field(), "password_1", "password_2"]
+    password_1 = serializers.CharField(write_only=True)
+    password_2 = serializers.CharField(write_only=True)
 
     def save(self, **kwargs):
         user = super(RegisterSerializer, self).save(**kwargs)
