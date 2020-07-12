@@ -20,29 +20,29 @@ def resend_email(old_token):
         send_passwordreset_email(user, create_password_reset_token(user))
     elif token_type == TOKEN_EMAIL_CHANGE:
         email = get_email_from_token(old_token)
-        send_email_change_email(email, create_email_change_token(user, email))
+        send_email_change_email(email, user, create_email_change_token(user, email))
 
 
 def send_confirmation_email(user, token):
-    context = {"token_url": create_email_confirmation_url(token)}
+    context = {"token_url": create_email_confirmation_url(token), "user": user}
     template_prefix = "drf_jwt_util/email/confirmation"
     send_email(user.email, template_prefix, context)
 
 
-def send_email_change_email(email, token):
-    context = {"token_url": create_email_change_url(token)}
+def send_email_change_email(email, user, token):
+    context = {"token_url": create_email_change_url(token), "user": user}
     template_prefix = "drf_jwt_util/email/emailchange"
     send_email(email, template_prefix, context)
 
 
 def send_activation_email(user, token):
-    context = {"token_url": create_activation_url(token)}
+    context = {"token_url": create_activation_url(token), "user": user}
     template_prefix = "drf_jwt_util/email/activation"
     send_email(user.email, template_prefix, context)
 
 
 def send_passwordreset_email(user, token):
-    context = {"token_url": create_password_reset_url(token)}
+    context = {"token_url": create_password_reset_url(token), "user": user}
     template_prefix = "drf_jwt_util/email/passwordreset"
     send_email(user.email, template_prefix, context)
 
