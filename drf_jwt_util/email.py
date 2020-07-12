@@ -57,8 +57,8 @@ def send_email(to_email, template_prefix, context):
     subject = render_to_string('{}_subject.txt'.format(template_prefix), context)
     subject = " ".join(subject.splitlines()).strip()
 
-    html_rendered = render_email('{}_message.html'.format(template_prefix))
-    text_rendered = render_email('{}_message.txt'.format(template_prefix))
+    html_rendered = render_email('{}_message.html'.format(template_prefix), context)
+    text_rendered = render_email('{}_message.txt'.format(template_prefix), context)
     if not html_rendered and not text_rendered:
         raise TemplateDoesNotExist()
     if text_rendered:
