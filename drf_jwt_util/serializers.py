@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from rest_framework_jwt.compat import PasswordField
+from rest_framework.fields import get_error_detail
 from rest_framework_jwt.serializers import RefreshJSONWebTokenSerializer as OrigRefreshJSONWebTokenSerializer
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 
@@ -68,7 +69,7 @@ class ValidatePasswordMixin:
         try:
             validate_password(value)
         except ValidationError as exc:
-            raise serializers.ValidationError(str(exc))
+            raise serializers.ValidationError(get_error_detail(exc))
         return value
 
     def validate(self, data):
